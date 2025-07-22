@@ -90,7 +90,7 @@ refs.loadBtn.addEventListener("click", async (event) => {
 
             const totalPages = Math.ceil(totalHits / 15);
             
-            if (page > totalPages) {
+            if (page >= totalPages) {
                 hideLoadMoreButton();
                 iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
