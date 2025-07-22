@@ -7,15 +7,20 @@ import {
     createGallery,
     clearGallery,
     showLoader,
-    hideLoader
- } from "./js/render-functions";
-
+    hideLoader,
+    showLoadMoreButton,
+    hideLoadMoreButton,
+} from "./js/render-functions";
+ 
+let query = "";
+let page = 1;
 
 refs.form.addEventListener("submit", (event) => {
     event.preventDefault();
     clearGallery();
 
-    const query = refs.input.value.trim();
+    query = refs.input.value.trim();
+    page = 1;
 
     if (!query) { 
         return iziToast.error({
@@ -26,23 +31,35 @@ refs.form.addEventListener("submit", (event) => {
 
     showLoader();
 
-    getImagesByQuery(query)
-        .then((res) => {
+    getImagesByQuery(query, page)
+        .then(({ hits, totalHits }) => {
+            console.log(totalHits);
+            console.log(hits);
             
-            if (res.length === 0) {
+            
+            if (hits.length === 0) {
                 return iziToast.error({
                 message: `Sorry, there are no images matching your search ${query}. Please try again!`,
-            position: "topRight"
+            position: "topRight",
             })
             } 
 
-            createGallery(res)
+            createGallery(hits);
+
+            if (hits.length === 15) {
+                showLoadMoreButton();
+            } else if (hits.length >= totalHits) {
+                iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: "topRight",
+      });
+            }
             
         })
         .catch((error) => {
             iziToast.error({
                 title: error.message,
-            })
+            });
         })
         .finally(() => {
         hideLoader()
@@ -50,3 +67,35 @@ refs.form.addEventListener("submit", (event) => {
     
     refs.form.reset();
 });
+
+refs.loadBtn.addEventListener("click", () => {
+    page += 1;
+    showLoader();
+
+    getImagesByQuery(query, page)
+        .then(({ hits, totalHits }) => {
+            createGallery(hits);
+
+            const totalPages = Math.ceil(totalHits / 15);
+            console.log(totalHits);
+            
+
+            if (page > totalPages) {
+                hideLoadMoreButton();
+                iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: "topRight",
+      });
+            }
+        })
+        .catch((error) => {
+            iziToast.error({
+                title: error.message,
+            });
+        })
+        .finally(() => {
+            hideLoader();
+        });
+    
+});
+ 

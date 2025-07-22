@@ -56,4 +56,12 @@ export const showLoader = () => {
 
 export const hideLoader = () => {
     refs.loader.classList.add("hidden");
-}
+};
+
+export const showLoadMoreButton = () => {
+    refs.loadBtn.classList.remove("hidden");
+};
+
+export const hideLoadMoreButton = () => {
+    refs.loadBtn.classList.add("hidden");
+};
