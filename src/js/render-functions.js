@@ -65,3 +65,23 @@ export const showLoadMoreButton = () => {
 export const hideLoadMoreButton = () => {
     refs.loadBtn.classList.add("hidden");
 };
+
+export const smoothScrollByCard = () => {
+    const firstCard = document.querySelector(".gallery-item");
+  const cardHeight = firstCard?.getBoundingClientRect().height || 0;
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+  });
+}
+
+export const toggleScrollButton = () => {
+  const headerTop = refs.header.getBoundingClientRect().top;
+
+  if (headerTop < 0) {
+    refs.scrollBtn.classList.remove("hidden");
+  } else {
+    refs.scrollBtn.classList.add("hidden");
+  }
+}

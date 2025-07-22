@@ -8,6 +8,12 @@
 @import url('./reset.css');
 @import url('./base.css');
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .form {
   display: flex;
   gap: 8px;
@@ -177,6 +183,34 @@ label {
     left: 100%;
     transform: translateX(0%);
   }
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  /* padding: 10px 10px; */
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgb(255, 107, 10);
+  background-color: transparent;
+  color: #fff;
+  border-radius: 50px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 16px solid rgb(255, 107, 10);
 }
 
 .hidden {
