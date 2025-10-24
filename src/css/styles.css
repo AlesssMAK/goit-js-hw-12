@@ -45,7 +45,7 @@
   background-color: #010101;
 }
 
-input {
+.form input {
   border: 1px solid #808080;
   border-radius: 4px;
   width: 272px;
@@ -55,7 +55,7 @@ input {
 }
 
 @media (max-width: 480px) {
-  .input {
+  .form input {
     width: 170px;
   }
 }
