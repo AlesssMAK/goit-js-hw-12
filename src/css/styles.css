@@ -14,6 +14,10 @@
   padding: 0 16px;
 }
 
+.header {
+  padding-top: 16px;
+}
+
 .form {
   display: flex;
   gap: 8px;
@@ -48,6 +52,12 @@ input {
   height: 36px;
   background: #fff;
   padding-left: 16px;
+}
+
+@media (max-width: 480px) {
+  .input {
+    width: 170px;
+  }
 }
 
 input:hover,
@@ -189,7 +199,6 @@ label {
   position: fixed;
   bottom: 0px;
   right: 20px;
-  /* padding: 10px 10px; */
   width: 34px;
   height: 34px;
   border: 3px solid rgb(255, 107, 10);
@@ -211,6 +220,10 @@ label {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 16px solid rgb(255, 107, 10);
+}
+
+.sl-wrapper .sl-image .sl-caption {
+  position: static !important;
 }
 
 .hidden {
